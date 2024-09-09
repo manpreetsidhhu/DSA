@@ -36,17 +36,33 @@ int traversal(Node* head){
     return 0;
 }
 Node* deletingHead(Node* head){
+    if(head == NULL) return head;
     Node* temp = head;
     head = head->next;
     free(temp);
     cout<<"\nHead of LinkedList is deleted."<<endl;
     return head;
 }
+Node* deletingTail(Node* head){
+    if(head == NULL || head->next == NULL) return NULL;
+    Node* temp = head;
+    while(temp->next->next != NULL){
+        temp = temp->next;
+    }
+    free(temp->next);
+    temp->next = nullptr;
+    cout<<"\nTail of LinkedList is deleted."<<endl;
+    return head;
+}
 
 int main(){
-    int arr[] = {10,20,30,40,50};
+    int arr[] = {10,20,30,40,50,60,70,80,90};
     int size = sizeof(arr)/sizeof(arr[0]);
     Node* head = convertToLinkedList(arr,size);
+    cout<<"LinkedList original: "<<endl;
+    traversal(head);
     head = deletingHead(head);
+    traversal(head);
+    head = deletingTail(head);
     traversal(head);
 }
