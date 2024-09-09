@@ -5,14 +5,17 @@ class Node{
     public:
     int data;
     Node* next;
+    Node* prev;
     public:
-    Node(int data1, Node* next1){
+    Node(int data1, Node* next1, Node* prev1){
         data = data1;
         next = next1;
+        prev = prev1;
     }
     Node(int data1){
         data = data1;
         next = nullptr;
+        prev = nullptr;
     }
 };
 // Creating a linked list by converting it from an array
@@ -26,7 +29,6 @@ Node* convertToLinkedList(int arr[], int size){
     }
     return head;
 }
-
 int traversal(Node* head){
     Node* temp = head;
     while(temp){
@@ -39,7 +41,7 @@ Node* deletingHead(Node* head){
     if(head == NULL) return head;
     Node* temp = head;
     head = head->next;
-    free(temp);
+    delete temp;
     cout<<"\nHead of LinkedList is deleted."<<endl;
     return head;
 }
@@ -49,9 +51,33 @@ Node* deletingTail(Node* head){
     while(temp->next->next != NULL){
         temp = temp->next;
     }
-    free(temp->next);
+    delete temp->next;
     temp->next = nullptr;
     cout<<"\nTail of LinkedList is deleted."<<endl;
+    return head;
+}
+Node* deletingAtK(Node* head, int K){
+    if(head == NULL) return head;
+    if(K == 1) return deletingHead(head);
+
+    int counter = 0;
+    Node* temp = head;
+    Node* prev = NULL;
+
+    while(temp != NULL){
+        counter++;
+        if(counter == K){
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        if(temp == nullptr || temp->next == nullptr){
+            cout << "Invalid position!" << endl;
+            return head;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
     return head;
 }
 
@@ -64,5 +90,9 @@ int main(){
     head = deletingHead(head);
     traversal(head);
     head = deletingTail(head);
+    traversal(head);
+    cout<<"\nEnter the position, where to delete a Node: "<<endl;
+    int k; cin>>k;
+    head = deletingAtK(head, k);
     traversal(head);
 }
