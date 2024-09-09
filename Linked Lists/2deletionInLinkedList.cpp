@@ -42,7 +42,7 @@ Node* deletingHead(Node* head){
     Node* temp = head;
     head = head->next;
     delete temp;
-    cout<<"\nHead of LinkedList is deleted."<<endl;
+    cout<<"Head of LinkedList is deleted."<<endl;
     return head;
 }
 Node* deletingTail(Node* head){
@@ -80,6 +80,22 @@ Node* deletingAtK(Node* head, int K){
     }
     return head;
 }
+Node* deletingElement(Node* head, int value){
+    if(head == NULL) return head;
+    if(head->data == value) return deletingHead(head);
+    Node* temp = head;
+    Node* prev = NULL;
+    while(temp){
+        if(temp->data == value){
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
 
 int main(){
     int arr[] = {10,20,30,40,50,60,70,80,90};
@@ -91,8 +107,13 @@ int main(){
     traversal(head);
     head = deletingTail(head);
     traversal(head);
-    cout<<"\nEnter the position, where to delete a Node: "<<endl;
+    cout<<"\nEnter the position, where to delete a Node: ";
     int k; cin>>k;
     head = deletingAtK(head, k);
     traversal(head);
+    cout<<"\nEnter the Node value you want to delete: ";
+    int value; cin>>value;
+    head = deletingElement(head, value);
+    traversal(head);
+    return 0;
 }
