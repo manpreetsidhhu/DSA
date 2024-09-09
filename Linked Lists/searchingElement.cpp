@@ -47,5 +47,4 @@ int main(){
     cout<<"Element to be searched in LinkedList : "; cin>>element;
     int result = searchingElement(head,element);
     cout<<"Element "<< element <<" is present in LinkedList at index "<<result<<endl;
-
 }
