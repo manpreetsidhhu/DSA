@@ -10,9 +10,12 @@ int bubbleSort(int arr[], int size){
                 arr[j+1] = temp;
             }
         }
-    }cout<<"\nSorted Array: [";
+    }cout<<"\nby bubbleSort\nSorted Array: [";
     for(int i=0;i<size;i++){
-        cout<<arr[i]<<" ";
+        cout<<arr[i];
+        if (i < size - 1) {
+            cout << ", ";
+        }
     }cout<<"]";
     return 1;
 }
