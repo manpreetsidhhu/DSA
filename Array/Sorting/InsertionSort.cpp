@@ -14,7 +14,10 @@ int insertionSort(int arr[], int size){
     }
     cout<<"\n(by Insertion sort)\nSorted Array: [";
     for(int i=0;i<size;i++){
-        cout<<arr[i]<<" ";
+        cout<<arr[i];
+        if (i < size - 1) {
+            cout << ", ";
+        }
     }cout<<"]";
     return 1;
 }
