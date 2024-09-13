@@ -21,7 +21,6 @@ int insertionSort(int arr[], int size){
     }cout<<"]";
     return 1;
 }
-
 int main(){
     int n; 
     cout<<"Enter the size of array: ";
