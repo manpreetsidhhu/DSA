@@ -58,6 +58,20 @@ Node* insertAtIndex(Node* head, int value, int index){
         temp = temp->next;
     } return head;
 }
+Node* insertAtValue(Node* head, int value, int value1){
+    if(head==NULL) return NULL;
+    if(head->data==value1) return new Node(value,head);
+    Node* temp = head;
+    Node* prev = NULL;
+    while(temp->next != NULL){
+        if(temp->next->data == value1){
+            Node* newNode = new Node(value,temp->next);
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    } return head;
+}
 int traversal(Node* head){
     Node* temp = head;
     while(temp){
@@ -85,5 +99,11 @@ int main(){
     cout<<"Enter Value to be inserted at position "<<index<<" : ";
     int value3; cin>>value3;
     head = insertAtIndex(head, value3, index);
+    traversal(head);
+    cout<<"\nEnter value, before where value to be inserted: ";
+    int index1; cin>>index1;
+    cout<<"Enter Value to be inserted before "<<index1<<" : ";
+    int value4; cin>>value4;
+    head = insertAtValue(head, value4, index1);
     traversal(head);
 }
